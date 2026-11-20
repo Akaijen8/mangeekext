@@ -106,10 +106,6 @@ class DefaultExtension extends MProvider {
     list.push(...res.reading);
     return this.parseList(list);
   }
-  async getLatestUpdates(page) {
-    return this.search("", page, []);
-  }
-
   async getDetail(url) { 
     const id =url;
     const res = await this.request(
