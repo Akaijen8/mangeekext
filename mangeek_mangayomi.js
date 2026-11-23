@@ -8,7 +8,7 @@ const mangayomiSources = [{
   typeSource: "single",
   itemType: 0,
   isNsfw: false,
-  version: "0.1.2",
+  version: "0.1.1",
   pkgPath: "manga/src/pt/mangeek.js"
 }];
 
@@ -110,31 +110,28 @@ class DefaultExtension extends MProvider {
     return this.search("", page, []);
   }
 
-  async getDetail(url) {
-    const id = url;
-    const res = await this.request("manga", id);
+  async getDetail(url) { 
+    const id =url;
+    const res = await this.request(
+      "manga", id
+    )
     const a = res.attributes;
-    const name = res.title || "";
-    const description = res.description || "";
+    const name = (res.title || "")
+    const description =(res.description || "")
     const genres = res.tags || [];
-    const chapters = (res.chapters || []).map(chapter => {
-        const match = chapter.title.match(/\d+(?:\.\d+)?/);
-        const number = match ? match[0] : "";
-        return {
-            name: `Capítulo ${number} (mangeek)`,
-            url: String(chapter.id),
-            scanlator: "mangeek",
-            dateUpload: "",
-            chapter: number
-        };
-    });
-    return {
-        name: name,
-        description: description,
-        genres: genres,
-        chapters: chapters
-    };
-}
+    const chapters = (res.chapters || []).map(chapter => ({
+      name: chapter.title,
+      url: String(chapter.id),
+      scanlator: "mangeek",
+      dateUpload: ""
+    }));
+    return{
+      "name": name,
+      "description": description,
+      "genres": genres,
+      "chapters": chapters,
+    }
+   }
   async getPageList(url) {
   const res = await this.request("chapter", url);
 
