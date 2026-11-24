@@ -8,7 +8,7 @@ const mangayomiSources = [{
   typeSource: "single",
   itemType: 0,
   isNsfw: false,
-  version: "0.1.3",
+  version: "0.1.4",
   pkgPath: "manga/src/pt/mangeek.js"
 }];
 
@@ -144,6 +144,12 @@ async getDetail(url) {
 
   const pages = (res.pages || []).map(page => ({
     url: page,
+    headers: {
+      "User-Agent": "Mozilla/5.0",
+      "Referer": "http://geekstations.com.br/",
+      "Accept": "/",
+      "accept-Encoding":"identy"
+    }
   }));
 
   return pages;
