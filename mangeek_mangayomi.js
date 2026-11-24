@@ -110,33 +110,40 @@ class DefaultExtension extends MProvider {
     return this.search("", page, []);
   }
 
-  async getDetail(url) { 
-    const id =url;
-    const res = await this.request(
-      "manga", id
-    )
+async getDetail(url) {
+    const id = url;
+    const res = await this.request("manga", id);
     const a = res.attributes;
-    const name = (res.title || "")
-    const description =(res.description || "")
+    const name = res.title || "";
+    const description = res.description || "";
     const genres = res.tags || [];
-    const chapters = (res.chapters || []).map(chapter => ({
-      name: chapter.title,
-      url: String(chapter.id),
-      scanlator: "mangeek",
-      dateUpload: ""
-    }));
-    return{
-      "name": name,
-      "description": description,
-      "genres": genres,
-      "chapters": chapters,
-    }
-   }
+
+    const chapters = (res.chapters || []).map(chapter => {
+        const title = String(chapter.title || "");
+  const match = title.match(/\d+(?:\.\d+)?/);
+  const num = match ? Number(match[0]) : 0;
+        return {
+            name: `Ch. ${num}`,
+            url: String(chapter.id),
+            chapterNumber: num,
+            chapter_number:num,
+            scanlator: "",
+            dateUpload: ""
+        };
+    }).reverse();
+
+    return {
+        name: name,
+        description: description,
+        genres: genres,
+        chapters: chapters
+    };
+}
   async getPageList(url) {
   const res = await this.request("chapter", url);
 
   const pages = (res.pages || []).map(page => ({
-    url: page;
+    url: page,
   }));
 
   return pages;
