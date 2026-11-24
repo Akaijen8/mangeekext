@@ -8,7 +8,7 @@ const mangayomiSources = [{
   typeSource: "single",
   itemType: 0,
   isNsfw: false,
-  version: "0.1.4",
+  version: "0.1.5",
   pkgPath: "manga/src/pt/mangeek.js"
 }];
 
