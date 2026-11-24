@@ -8,7 +8,7 @@ const mangayomiSources = [{
   typeSource: "single",
   itemType: 0,
   isNsfw: false,
-  version: "0.1.1",
+  version: "0.1.2",
   pkgPath: "manga/src/pt/mangeek.js"
 }];
 
@@ -141,6 +141,7 @@ class DefaultExtension extends MProvider {
       "User-Agent": "Mozilla/5.0",
       "Referer": "http://geekstations.com.br/",
       "Accept": "image/avif,image/webp,image/apng,image/*,*/*;q=0.8"
+      "accept-Encoding":"indenty"
     }
   }));
 
