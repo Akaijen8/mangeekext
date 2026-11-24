@@ -136,13 +136,7 @@ class DefaultExtension extends MProvider {
   const res = await this.request("chapter", url);
 
   const pages = (res.pages || []).map(page => ({
-    url: page,
-    headers: {
-      "User-Agent": "Mozilla/5.0",
-      "Referer": "http://geekstations.com.br/",
-      "Accept": "image/avif,image/webp,image/apng,image/*,*/*;q=0.8"
-      "accept-Encoding":"indenty"
-    }
+    url: page;
   }));
 
   return pages;
